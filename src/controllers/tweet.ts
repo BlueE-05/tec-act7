@@ -7,6 +7,10 @@ export default class TweetController {
         return this.db.getAllTweets();
     }
 
+    async getTweetPairIds() {
+        return this.db.getTweetPairIds();
+    }
+
     async getTweetById(id: string) {
         return this.db.getTweetById(id);
     }

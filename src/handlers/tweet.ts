@@ -17,6 +17,15 @@ export default class TweetHTTPHandler {
         }
     }
 
+    async getTweetPairIds(req: Request, res: Response, next: NextFunction) {
+        try {
+            const tweet = await this.tweetController.getTweetPairIds();
+            res.json(tweet);
+        } catch (error) {
+            next(error);
+        }
+    }
+
     async getTweetById(req: Request, res: Response, next: NextFunction) {
         try {
             const tweet = await this.tweetController.getTweetById(req.params.id);

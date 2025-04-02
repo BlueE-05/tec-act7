@@ -11,6 +11,10 @@ export default class TweetDB {
         return this.tweets;
     }
 
+    async getTweetPairIds() {
+        return this.tweets.filter(tweet => parseInt(tweet.id) % 2 === 0);
+    }
+
     async getTweetById(id: string) {
         return this.tweets.find(tweet => tweet.id === id);
     }
