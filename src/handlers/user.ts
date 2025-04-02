@@ -1,24 +1,26 @@
-import { Request, Response, NextFunction } from "express";
-import UserController from "@/controllers/user";
+import { Request, Response, NextFunction } from 'express';
+import UserController from '../controllers/user';
 
 export default class UserHTTPHandler {
+    private userController: UserController;
 
-    private userController = new UserController();
-    
+    constructor() {
+        this.userController = new UserController();
+    }
+
     async getUsers(req: Request, res: Response, next: NextFunction) {
         try {
             const users = await this.userController.getAllUsers();
-            res.json(users)
+            res.json(users);
         } catch (error) {
             next(error);
         }
     }
 
-    // Revisar los metodos de aqui en adelante, ya que no se si son los correctos
     async getUserById(req: Request, res: Response, next: NextFunction) {
         try {
-            const user = await this.getUserById(req, res, next);
-            res.json(user)
+            const user = await this.userController.getUserById(req.params.id);
+            res.json(user);
         } catch (error) {
             next(error);
         }
@@ -26,8 +28,9 @@ export default class UserHTTPHandler {
 
     async updateUser(req: Request, res: Response, next: NextFunction) {
         try {
-            const user = await this.updateUser(req, res, next);
-            res.json(user)
+            const { name, username } = req.body;
+            const user = await this.userController.updateUser(req.params.id, name, username);
+            res.json(user);
         } catch (error) {
             next(error);
         }
@@ -35,11 +38,10 @@ export default class UserHTTPHandler {
 
     async deleteUser(req: Request, res: Response, next: NextFunction) {
         try {
-            const user = await this.deleteUser(req, res, next);
-            res.json(user)
+            await this.userController.deleteUser(req.params.id);
+            res.json({ message: 'User deleted successfully' });
         } catch (error) {
             next(error);
         }
     }
-
 }
