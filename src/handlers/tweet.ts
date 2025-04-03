@@ -52,4 +52,13 @@ export default class TweetHTTPHandler {
             next(error);
         }
     }
+
+    async createTweet(req: Request, res: Response, next: NextFunction) {
+        try {
+            const tweet = await this.tweetController.createTweet(req.body.text);
+            res.json(tweet);
+        } catch (error) {
+            next(error);
+        }
+    }
 }

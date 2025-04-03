@@ -31,4 +31,13 @@ export default class TweetDB {
     async deleteTweet(id: string) {
         this.tweets = this.tweets.filter(tweet => tweet.id !== id);
     }
+
+    async createTweet(text: string) {
+        const newTweet = {
+            id: (this.tweets.length + 1).toString(),
+            text
+        }
+        this.tweets.push(newTweet);
+        return newTweet;
+    }
 }

@@ -9,5 +9,6 @@ router.get('/pair', (req, res, next) => tweetHandler.getTweetPairIds(req, res, n
 router.get('/:id', (req, res, next) => tweetHandler.getTweetById(req, res, next));
 router.put('/:id', (req, res, next) => tweetHandler.updateTweet(req, res, next));
 router.delete('/:id', (req, res, next) => tweetHandler.deleteTweet(req, res, next));
+router.post('/newTweet', (req, res, next) => tweetHandler.createTweet(req, res, next));
 
 export default router;

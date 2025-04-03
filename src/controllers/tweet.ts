@@ -22,4 +22,8 @@ export default class TweetController {
     async deleteTweet(id: string) {
         return this.db.deleteTweet(id);
     }
+
+    async createTweet(data: string) {
+        return this.db.createTweet(data);
+    }
 }
