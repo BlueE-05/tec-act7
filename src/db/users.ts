@@ -21,10 +21,11 @@ export default class UserDB {
     }
 
     async updateUser(id: string, name: string, username: string) {
-        const tweet = this.users.find(user => user.id === id);
-        if (tweet) {
-            Object.assign(tweet, name, username);
-            return tweet;
+        const user = this.users.find(user => user.id === id);
+        if (user) {
+            user.name = name;
+            user.username = username;
+            return user;
         }
         return null;
     }

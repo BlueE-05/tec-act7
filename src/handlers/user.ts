@@ -28,8 +28,7 @@ export default class UserHTTPHandler {
 
     async updateUser(req: Request, res: Response, next: NextFunction) {
         try {
-            const { name, username } = req.body;
-            const user = await this.userController.updateUser(req.params.id, name, username);
+            const user = await this.userController.updateUser(req.params.id, req.body.name, req.body.username);
             res.json(user);
         } catch (error) {
             next(error);
@@ -40,6 +39,15 @@ export default class UserHTTPHandler {
         try {
             await this.userController.deleteUser(req.params.id);
             res.json({ message: 'User deleted successfully' });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    async createUser(req: Request, res: Response, next: NextFunction) {
+        try {
+            const user = await this.userController.createUser(req.body.name, req.body.username);
+            res.json(user);
         } catch (error) {
             next(error);
         }

@@ -18,4 +18,8 @@ export default class UserController {
     async deleteUser(id: string) {
         return this.db.deleteUser(id);
     }
+
+    async createUser(name: string, username: string) {
+        return this.db.createUser(name, username);
+    }
 }
